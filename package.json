@@ -1,0 +1,19 @@
+{
+    "id": "hao-indexList",
+    "name": "hao-indexList   城市选择，通讯录，地址索引列表等",
+    "displayName": "hao-indexList   城市选择，通讯录，地址索引列表等",
+    "version": "1.0.3",
+    "description": "城市选择,地址选取,通讯录等索引列表 ，支持搜索功能，可自定义显示字段，功能高度自由选择组合，能满足多种场景",
+    "keywords": [
+        "城市选择",
+        "地址",
+        "通讯录",
+        "索引列表"
+    ],
+    "dcloudext": {
+        "category": [
+            "前端组件",
+            "通用组件"
+        ]
+    }
+}

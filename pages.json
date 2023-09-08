@@ -3,10 +3,31 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "天气预报"
+				"navigationStyle": "custom"
 			}
 		}, {
-			"path": "pages/add-city/add-city",
+			"path": "pages/search-city/search-city",
+			"style": {
+				"navigationBarTitleText": "搜索城市",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/future-weather/future-weather",
+			"style": {
+				"navigationBarTitleText": "未来7天",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/manage-city/manage-city",
+			"style": {
+				"navigationBarTitleText": "城市管理",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/new-city/new-city",
 			"style": {
 				"navigationBarTitleText": "添加城市",
 				"enablePullDownRefresh": false
