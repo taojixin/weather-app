@@ -6,7 +6,7 @@
 				<view class="left">+</view>
 			</navigator>
 			<view class="title">{{livesWeatherInfo.province}} {{livesWeatherInfo.city}}</view>
-			<view class="right">···</view>
+			<view class="right" @tap="otherClick">···</view>
 		</view>
 		<!-- 2.实时天气 -->
 		<view class="weather">
@@ -53,32 +53,82 @@
 	} from '../../assets/global-variables.js'
 	import {
 		getLivesWeatherSer,
-		getForecastWeatherSer
+		getForecastWeatherSer,
+		getSevenLoLaWeatherSer
 	} from '../../services/weather.js'
+	import {
+		removeDuplicates
+	} from '../../utils/removeDuplicates.js'
 	export default {
 		data() {
 			return {
 				// 实时天气
 				livesWeatherInfo: {},
 				// 预报天气
-				forecastWeatherInfo: []
+				forecastWeatherInfo: [],
+				currentCity: {}
 			}
 		},
 		onLoad() {
-			// 实时天气
-			getLivesWeatherSer().then(res => {
-				console.log(res);
-				this.livesWeatherInfo = res.lives[0]
-			})
-			// 预报天气
-			getForecastWeatherSer().then(res => {
-				console.log(res);
-				this.forecastWeatherInfo = res.forecasts[0].casts
-			})
+			// 1.获取当前城市信息
+			if (uni.getStorageSync('currentCity')) {
+				this.currentCity = JSON.parse(uni.getStorageSync('currentCity'))
+				console.log(this.currentCity);
+			} else {
+				// 将当前城市添加到城市列表
+				this.addCityOnload()
+				// 设置默认城市
+				const currentCity = {
+					adcode: '510117',
+					areaName: '郫都区'
+				}
+				uni.setStorageSync('currentCity', JSON.stringify(currentCity))
+				this.currentCity = JSON.parse(uni.getStorageSync('currentCity'))
+
+				uni.showToast({
+					icon: 'none',
+					title: '默认城市为郫都区'
+				})
+			}
+			// 2.获取天气信息
+			this.getWeatherInfoOnload()
 		},
 		methods: {
+			// 天气icon
 			chooseWeatherIconVue(a) {
 				return chooseWeatherIcon(a)
+			},
+			// 添加地址
+			addCityOnload() {
+				let localCity = JSON.parse(uni.getStorageSync("localCity") || '[]')
+				console.log(localCity);
+				localCity.push({
+					areaId: 510117,
+					areaName: '郫都区'
+				})
+				const newLocalCity = removeDuplicates(localCity)
+				uni.setStorageSync('localCity', JSON.stringify(newLocalCity))
+			},
+			// 请求天气信息
+			getWeatherInfoOnload() {
+				// 实时天气
+				getLivesWeatherSer(this.currentCity.adcode).then(res => {
+					console.log(res);
+					this.livesWeatherInfo = res.lives[0]
+				})
+				// 预报天气
+				getForecastWeatherSer(this.currentCity.adcode).then(res => {
+					// console.log(res);
+					this.forecastWeatherInfo = res.forecasts[0].casts
+				})
+			},
+			otherClick() {
+				uni.clearStorage().then(res => {
+					uni.showToast({
+						icon: 'none',
+						title: '清理成功！'
+					})
+				})
 			}
 		}
 	}

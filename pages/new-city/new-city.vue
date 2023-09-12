@@ -38,16 +38,21 @@
 	import {
 		chooseWeatherIcon
 	} from '../../utils/chooseWeacherIcon.js'
+	import {removeDuplicates} from '../../utils/removeDuplicates.js'
 	export default {
 		data() {
 			return {
 				cityName: '',
 				cityWeatherInfo: [],
 				areaId: 0,
-				areaName: ''
+				areaName: '',
 			};
 		},
 		onLoad(options) {
+			uni.showLoading({
+				title: '加载中，请稍后',
+				mask: true
+			})
 			this.areaId = options.areaId
 			this.areaName = options.areaName
 			console.log(options.areaId, options.areaName);
@@ -56,6 +61,7 @@
 				console.log(res.forecasts[0].casts);
 				this.cityName = res.forecasts[0].city
 				this.cityWeatherInfo = res.forecasts[0].casts
+				uni.hideLoading()
 			})
 		},
 		methods: {
@@ -63,17 +69,28 @@
 				return chooseWeatherIcon(a)
 			},
 			addCityClick() {
-				// let localCity = []
-				let localCity = JSON.parse(uni.getStorageSync("localCity"))
-				console.log(localCity);
+				// 获取本地城市列表并添加新的城市
+				let localCity = JSON.parse(uni.getStorageSync("localCity") || '[]')
 				localCity.push({
 					areaId: this.areaId,
 					areaName: this.areaName
 				})
-				uni.setStorageSync('localCity', JSON.stringify(localCity))
-				// uni.navigateTo({
-				// 	url: `pages/manage-city/manage-city`
-				// })
+				const newLocalCity = removeDuplicates(localCity) // 去除重复返回新的列表
+				uni.setStorageSync('localCity', JSON.stringify(newLocalCity))
+				uni.showToast({
+					icon:'none',
+					title:'添加成功！'
+				})
+				// 将新的城市添加为当前城市
+				const currentCity = {
+					adcode: this.areaId,
+					areaName: this.areaName
+				}
+				uni.setStorageSync('currentCity', JSON.stringify(currentCity))
+				// 跳转到首页
+				uni.reLaunch({
+					url: '/pages/index/index'
+				})
 			}
 		}
 	}

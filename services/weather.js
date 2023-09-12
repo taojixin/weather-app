@@ -9,17 +9,17 @@ import {
 
 // 高德天气api *************************************************
 // 获取实时天气
-export function getLivesWeatherSer() {
+export function getLivesWeatherSer(adcode) {
 	return http({
 		methods: "GET",
-		url: `https://restapi.amap.com/v3/weather/weatherInfo?city=510117&key=${gaodeKey}&extensions=base`,
+		url: `https://restapi.amap.com/v3/weather/weatherInfo?key=${gaodeKey}&extensions=base&city=${adcode}`,
 	})
 }
 // 获取预报天气
-export function getForecastWeatherSer() {
+export function getForecastWeatherSer(adcode) {
 	return http({
 		methods: "GET",
-		url: `https://restapi.amap.com/v3/weather/weatherInfo?city=510117&key=${gaodeKey}&extensions=all`,
+		url: `https://restapi.amap.com/v3/weather/weatherInfo?key=${gaodeKey}&extensions=all&city=${adcode}`,
 	})
 }
 // 获取预报天气根据adcode
@@ -44,5 +44,12 @@ export function getSevenWeatherCityNameSer(cityName) {
 	return http({
 		methods: "GET",
 		url: `https://v0.yiketianqi.com/api?unescape=1&version=v9&appid=${appid}&appsecret=${appsecret}&city=${cityName}`
+	})
+}
+// 根据经纬度获取七天天气信息
+export function getSevenLoLaWeatherSer(longitude,latitude	) {
+	return http({
+		methods: "GET",
+		url: `https://v0.yiketianqi.com/api?unescape=1&version=v9&appid=${appid}&appsecret=${appsecret}&lng=${longitude}&lat=${latitude}`
 	})
 }

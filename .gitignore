@@ -1,3 +1,5 @@
 unpackage
-assets/*.js
+assets/global-variables.js
 node_modules/
+.vite
+.hbuilderx
