@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4242113 */
-  src: url('iconfont.woff2?t=1694162947580') format('woff2'),
-       url('iconfont.woff?t=1694162947580') format('woff'),
-       url('iconfont.ttf?t=1694162947580') format('truetype');
+  src: url('iconfont.woff2?t=1694509256470') format('woff2'),
+       url('iconfont.woff?t=1694509256470') format('woff'),
+       url('iconfont.ttf?t=1694509256470') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,54 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-yundong:before {
+  content: "\e807";
+}
+
+.icon-lvyou:before {
+  content: "\e60c";
+}
+
+.icon-shangchang:before {
+  content: "\e633";
+}
+
+.icon-xinqingyiban-yuan:before {
+  content: "\e7d0";
+}
+
+.icon-yifu:before {
+  content: "\e696";
+}
+
+.icon-yusan:before {
+  content: "\e698";
+}
+
+.icon-shushi:before {
+  content: "\e634";
+}
+
+.icon-kongtiao:before {
+  content: "\e617";
+}
+
+.icon-kongqizhiliangfenxi:before {
+  content: "\ec97";
+}
+
+.icon-diaoyu:before {
+  content: "\e650";
+}
+
+.icon-fangshaishuang-01:before {
+  content: "\e607";
+}
+
+.icon-ziwaixianxiaodu:before {
+  content: "\e6cf";
 }
 
 .icon-icon_tianjia:before {

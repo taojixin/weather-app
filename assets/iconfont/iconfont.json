@@ -6,6 +6,90 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "436018",
+      "name": "运动",
+      "font_class": "yundong",
+      "unicode": "e807",
+      "unicode_decimal": 59399
+    },
+    {
+      "icon_id": "2121726",
+      "name": "旅游",
+      "font_class": "lvyou",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "2797266",
+      "name": "商场",
+      "font_class": "shangchang",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "4464117",
+      "name": "心情一般-圆",
+      "font_class": "xinqingyiban-yuan",
+      "unicode": "e7d0",
+      "unicode_decimal": 59344
+    },
+    {
+      "icon_id": "5194319",
+      "name": "衣服",
+      "font_class": "yifu",
+      "unicode": "e696",
+      "unicode_decimal": 59030
+    },
+    {
+      "icon_id": "5194321",
+      "name": "雨伞",
+      "font_class": "yusan",
+      "unicode": "e698",
+      "unicode_decimal": 59032
+    },
+    {
+      "icon_id": "5698673",
+      "name": "舒适",
+      "font_class": "shushi",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "7123777",
+      "name": "空调",
+      "font_class": "kongtiao",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "17583242",
+      "name": "空气质量分析",
+      "font_class": "kongqizhiliangfenxi",
+      "unicode": "ec97",
+      "unicode_decimal": 60567
+    },
+    {
+      "icon_id": "23403654",
+      "name": "钓鱼",
+      "font_class": "diaoyu",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    },
+    {
+      "icon_id": "23410694",
+      "name": "防晒霜",
+      "font_class": "fangshaishuang-01",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "37055118",
+      "name": "紫外线消毒",
+      "font_class": "ziwaixianxiaodu",
+      "unicode": "e6cf",
+      "unicode_decimal": 59087
+    },
+    {
       "icon_id": "4347520",
       "name": "icon_添加",
       "font_class": "icon_tianjia",
