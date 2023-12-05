@@ -26,6 +26,15 @@
 			</view>
 		</view>
 		
+		<!-- 24小时实时天气 -->
+		<view class="twenty-fourth">
+			<view class="tf-item" v-for="(item,index) in tfTemp" :key="index">
+				<view class="tf-temperature">{{item.tem}}°C</view>
+				<span style="margin: 3px 0;" v-html="chooseWeatherIconVue(item.wea)"></span>
+				<view class="tf-time">{{item.hours.replace('时','')}}:00</view>
+			</view>	
+		</view>
+		
 		<!-- 3.未来天气 -->
 		<view class="future-weather" v-if="forecastWeatherInfo.length !== 0">
 			<template v-for="(item,index) in forecastWeatherInfo">
@@ -70,7 +79,8 @@
 	import {
 		getLivesWeatherSer,
 		getForecastWeatherSer,
-		getSevenLoLaWeatherSer
+		getSevenLoLaWeatherSer,
+		getSevenWeatherCityNameSer
 	} from '../../services/weather.js'
 	import {
 		removeDuplicates
@@ -83,7 +93,9 @@
 				// 预报天气
 				forecastWeatherInfo: [],
 				currentCity: {},
-				lifeIndex: []
+				lifeIndex: [],
+				// 二十四小时实时天气
+				tfTemp: []
 			}
 		},
 		onLoad() {
@@ -92,63 +104,9 @@
 			// 2.获取天气信息
 			this.getWeatherInfoOnload()
 			// 3.获取生活指数信息
-			getLifeIndexSer(this.currentCity.areaName.replace('市', '').replace('县', '').replace('区', '')).then(res => {
-				console.log(res);
-				this.lifeIndex.push({
-					id: 1,
-					title: res.data.diaoyu.name.replace('指数', ''),
-					desc: res.data.diaoyu.desc,
-					icon: '<span class="iconfont">&#xe650;</span>'
-				})
-				this.lifeIndex.push({
-					id: 2,
-					title: res.data.kongtiao.name.replace('指数', ''),
-					desc: res.data.kongtiao.desc,
-					icon: '<span class="iconfont">&#xe617;</span>'
-				})
-				this.lifeIndex.push({
-					id: 3,
-					title: res.data.shushidu.name.replace('指数', ''),
-					desc: res.data.shushidu.desc,
-					icon: '<span class="iconfont">&#xe634;</span>'
-				})
-				this.lifeIndex.push({
-					id: 4,
-					title: res.data.chuanyi.name.replace('指数', ''),
-					desc: res.data.chuanyi.desc,
-					icon: '<span class="iconfont">&#xe696;</span>'
-				})
-				this.lifeIndex.push({
-					id: 5,
-					title: res.data.fangshai.name.replace('指数', ''),
-					desc: res.data.fangshai.desc,
-					icon: '<span class="iconfont">&#xe607;</span>'
-				})
-				this.lifeIndex.push({
-					id: 6,
-					title: res.data.yundong.name.replace('指数', ''),
-					desc: res.data.yundong.desc,
-					icon: '<span class="iconfont">&#xe807;</span>'
-				})
-				this.lifeIndex.push({
-					id: 7,
-					title: res.data.lvyou.name.replace('指数', ''),
-					desc: res.data.lvyou.desc,
-					icon: '<span class="iconfont">&#xe60c;</span>'
-				})
-				this.lifeIndex.push({
-					id: 8,
-					title: res.data.yusan.name.replace('指数', ''),
-					desc: res.data.yusan.desc,
-					icon: '<span class="iconfont">&#xe698;</span>'
-				})
-				this.lifeIndex.push({
-					id: 9,
-					title: res.data.ziwaixian.name.replace('指数', ''),
-					desc: res.data.ziwaixian.desc,
-					icon: '<span class="iconfont">&#xe6cf;</span>'
-				})
-				console.log(this.lifeIndex);
+			this.getLifeIndex()
+			getSevenWeatherCityNameSer(this.currentCity.areaName.replace('市', '').replace('县', '').replace('区', '')).then(res=> {
+				this.tfTemp = res.data[0].hours
 			})
 		},
 		methods: {
@@ -207,6 +165,66 @@
 						title: '清理成功！'
 					})
 				})
+			},
+			getLifeIndex() {
+				getLifeIndexSer(this.currentCity.areaName.replace('市', '').replace('县', '').replace('区', '')).then(res => {
+					// console.log(res);
+					this.lifeIndex.push({
+						id: 1,
+						title: res.data.diaoyu.name.replace('指数', ''),
+						desc: res.data.diaoyu.desc,
+						icon: '<span class="iconfont">&#xe650;</span>'
+					})
+					this.lifeIndex.push({
+						id: 2,
+						title: res.data.kongtiao.name.replace('指数', ''),
+						desc: res.data.kongtiao.desc,
+						icon: '<span class="iconfont">&#xe617;</span>'
+					})
+					this.lifeIndex.push({
+						id: 3,
+						title: res.data.shushidu.name.replace('指数', ''),
+						desc: res.data.shushidu.desc,
+						icon: '<span class="iconfont">&#xe634;</span>'
+					})
+					this.lifeIndex.push({
+						id: 4,
+						title: res.data.chuanyi.name.replace('指数', ''),
+						desc: res.data.chuanyi.desc,
+						icon: '<span class="iconfont">&#xe696;</span>'
+					})
+					this.lifeIndex.push({
+						id: 5,
+						title: res.data.fangshai.name.replace('指数', ''),
+						desc: res.data.fangshai.desc,
+						icon: '<span class="iconfont">&#xe607;</span>'
+					})
+					this.lifeIndex.push({
+						id: 6,
+						title: res.data.yundong.name.replace('指数', ''),
+						desc: res.data.yundong.desc,
+						icon: '<span class="iconfont">&#xe807;</span>'
+					})
+					this.lifeIndex.push({
+						id: 7,
+						title: res.data.lvyou.name.replace('指数', ''),
+						desc: res.data.lvyou.desc,
+						icon: '<span class="iconfont">&#xe60c;</span>'
+					})
+					this.lifeIndex.push({
+						id: 8,
+						title: res.data.yusan.name.replace('指数', ''),
+						desc: res.data.yusan.desc,
+						icon: '<span class="iconfont">&#xe698;</span>'
+					})
+					this.lifeIndex.push({
+						id: 9,
+						title: res.data.ziwaixian.name.replace('指数', ''),
+						desc: res.data.ziwaixian.desc,
+						icon: '<span class="iconfont">&#xe6cf;</span>'
+					})
+					// console.log(this.lifeIndex);
+				})
 			}
 		}
 	}
@@ -238,7 +256,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		margin: 50px 0 200px;
+		margin: 50px 0 100px;
 
 		.temperature {
 			font-size: 80px;
@@ -246,6 +264,22 @@
 
 		.today-weather {
 			margin: 20px 0;
+		}
+	}
+	
+	.twenty-fourth{
+		padding: 10px;
+		overflow-x: scroll;
+		border-bottom: 1px solid darkgray;
+		border-top: 1px solid darkgray;
+		height: 80px;
+		display: flex;
+		align-items: center;
+		.tf-item {
+			margin: 0 10px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
 		}
 	}
 

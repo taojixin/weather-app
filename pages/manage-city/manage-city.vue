@@ -15,7 +15,8 @@
 							<view class="delete"  @click="deleteClick(item)">删除</view>
 						</template>
 						<view>
-							<div class="city-weather-info" @tap='itemCityClick(item)' :style="{width: windowWidth - 80 + 'px'}">
+							<!-- <div class="city-weather-info" @tap='itemCityClick(item)' :style="{width: windowWidth - 80 + 'px'}"> -->
+							<div class="city-weather-info" @tap='itemCityClick(item)' :style="{width: windowWidth - 120 + 'px'}">
 								<div class="left">
 									<div class="left-top">
 										{{item.cityName}}

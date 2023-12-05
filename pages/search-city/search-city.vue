@@ -24,8 +24,8 @@
 				],
 				//当前城市
 				currentCity: {
-					"areaId": "430100",
-					"areaName": "长沙市",
+					"areaId": "510100",
+					"areaName": "成都市",
 				},
 				//热门城市
 				hotCity: [{
