@@ -43,7 +43,7 @@ export function getSevenWeatherSer() {
 export function getSevenWeatherCityNameSer(cityName) {
 	return http({
 		methods: "GET",
-		url: `https://v0.yiketianqi.com/api?unescape=1&version=v9&appid=${appid}&appsecret=${appsecret}&city=${cityName}`
+		url: `https://yiketianqi.com/api?unescape=1&version=v9&appid=${appid}&appsecret=${appsecret}&city=${cityName}`
 	})
 }
 // 根据经纬度获取七天天气信息

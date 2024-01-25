@@ -15,8 +15,8 @@
 							<view class="delete"  @click="deleteClick(item)">删除</view>
 						</template>
 						<view>
-							<!-- <div class="city-weather-info" @tap='itemCityClick(item)' :style="{width: windowWidth - 80 + 'px'}"> -->
-							<div class="city-weather-info" @tap='itemCityClick(item)' :style="{width: windowWidth - 120 + 'px'}">
+							<div class="city-weather-info" @tap='itemCityClick(item)' :style="{width: windowWidth - 80 + 'px'}">
+							<!-- <div class="city-weather-info" @tap='itemCityClick(item)' :style="{width: windowWidth - 120 + 'px'}"> -->
 								<div class="left">
 									<div class="left-top">
 										{{item.cityName}}
@@ -53,11 +53,11 @@
 		},
 		onLoad() {
 			// 获取屏幕宽度
-			uni.getSystemInfo({
-				success(res) {
-					this.windowWidth = res.windowWidth
-				}
-			})
+			// uni.getSystemInfo({
+			// 	success(res) {
+			// 		this.windowWidth = res.windowWidth
+			// 	}
+			// })
 			// 获取天气信息
 			this.getWeatherListInfo()
 		},
